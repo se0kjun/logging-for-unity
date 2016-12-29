@@ -11,8 +11,8 @@ public class TestScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        LogHelper.WriteLog(LogManager.Instance.SelectedLogFile("aa").LogFileFullPath, "\t", "test111", "test");
-        LogHelper.WriteLog(LogManager.Instance.SelectedLogFile("bb").LogFileFullPath, "\t", "test222", "test333");
+        LogManager.Instance.SelectedLogFile("aa").WriteLog("\t", "test111", "test");
+        LogManager.Instance.SelectedLogFile("bb").WriteLog("\t", "test222", "test333");
         //LogManager.Instance.WriteLog("\t", "test", "test");
     }
 }
