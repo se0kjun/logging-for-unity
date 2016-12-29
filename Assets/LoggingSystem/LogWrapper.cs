@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 
 [Serializable]
-public class LogWrapper {
+public class LogWrapper : LogHelper {
     // LOG IDENTIFIER: REQUIRED
     public string logID;
 
@@ -33,16 +33,7 @@ public class LogWrapper {
         private set
         {
             currentLogFileName = value;
-            logFileFullPath = logFilePath + "/" + logFileNamePrefix + value + "." + logExtension;
-        }
-    }
-
-    private string logFileFullPath;
-    public string LogFileFullPath
-    {
-        get
-        {
-            return logFileFullPath;
+            base.logFileFullPath = logFilePath + "/" + logFileNamePrefix + value + "." + logExtension;
         }
     }
     #endregion
@@ -67,7 +58,7 @@ public class LogWrapper {
             if (name != "")
             {
                 CurrentLogFileName = name;
-                LogHelper.WriteLog(LogFileFullPath, string.Join(((char)logFileHeaderDelim).ToString(), logFileHeader.ToArray()));
+                WriteLog(string.Join(((char)logFileHeaderDelim).ToString(), logFileHeader.ToArray()));
 
                 return name;
             }
@@ -95,7 +86,7 @@ public class LogWrapper {
             CurrentLogFileName += LogManager.Instance.countData;
         }
         // create file, write header
-        LogHelper.WriteLog(LogFileFullPath, string.Join(((char)logFileHeaderDelim).ToString(), logFileHeader.ToArray()));
+        WriteLog(string.Join(((char)logFileHeaderDelim).ToString(), logFileHeader.ToArray()));
 
         return CurrentLogFileName;
     }

@@ -2,10 +2,12 @@
 using System.Collections;
 
 public class LogHelper {
+    protected string logFileFullPath;
+
     // plain text
-    public static void WriteLog(string path, string log)
+    public void WriteLog(string log)
     {
-        using (var f = new System.IO.FileStream(/*LogFileFullPath*/path, System.IO.FileMode.Append, System.IO.FileAccess.Write))
+        using (var f = new System.IO.FileStream(logFileFullPath, System.IO.FileMode.Append, System.IO.FileAccess.Write))
         {
             using (var sw = new System.IO.StreamWriter(f, System.Text.Encoding.Unicode))
             {
@@ -15,21 +17,21 @@ public class LogHelper {
     }
 
     // delim
-    public static void WriteLog(string path, string delim, params string[] log)
+    public void WriteLog(string delim, params string[] log)
     {
-        WriteLog(path, string.Join(delim, log));
+        WriteLog(string.Join(delim, log));
     }
 
     // delim
-    public static void WriteLog(string path, LogHeaderDelimeter delim, params string[] log)
+    public void WriteLog(LogHeaderDelimeter delim, params string[] log)
     {
-        WriteLog(path, string.Join(((char)delim).ToString(), log));
+        WriteLog(string.Join(((char)delim).ToString(), log));
     }
 
     // csv
-    public static void WriteLogCSV(string path, params string[] log)
+    public void WriteLogCSV(params string[] log)
     {
-        WriteLog(path, "\t", log);
+        WriteLog("\t", log);
     }
 
     // write a plain text for specific file
